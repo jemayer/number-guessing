@@ -74,6 +74,13 @@ p {
     border-radius: 0.5rem;
     text-align: center;
     transition: border-color 0.2s;
+    -moz-appearance: textfield;
+}
+
+#guess-input::-webkit-outer-spin-button,
+#guess-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 #guess-input:focus {
