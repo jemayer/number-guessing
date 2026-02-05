@@ -1,10 +1,11 @@
 ---
 # number-guessing-ws7d
 title: Implement game logic
-status: todo
+status: completed
 type: task
+priority: normal
 created_at: 2026-02-05T18:54:28Z
-updated_at: 2026-02-05T18:54:28Z
+updated_at: 2026-02-05T19:01:51Z
 parent: number-guessing-sb6z
 ---
 
