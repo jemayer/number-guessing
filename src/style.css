@@ -258,6 +258,63 @@ button:active {
     background: #219a52;
 }
 
+#stats-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+    text-align: left;
+}
+
+#stats-section summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #667eea;
+    text-align: center;
+}
+
+#stats-section summary:hover {
+    color: #5a6fd6;
+}
+
+#stats-content {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8f8fc;
+    border-radius: 0.5rem;
+}
+
+#stats-content p {
+    margin: 0 0 0.5rem;
+    color: #555;
+    font-size: 0.9rem;
+}
+
+#best-scores-list {
+    margin-bottom: 1rem;
+}
+
+#best-scores-list ul {
+    margin: 0.5rem 0 0 0;
+    padding-left: 1.5rem;
+}
+
+#best-scores-list li {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+
+#reset-stats-btn {
+    width: 100%;
+    background: #e74c3c;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+}
+
+#reset-stats-btn:hover {
+    background: #c0392b;
+}
+
 @media (max-width: 480px) {
     main {
         padding: 1.5rem;

@@ -57,6 +57,23 @@
             <p id="win-text">Congratulations! You got it!</p>
             <button id="play-again">Play Again</button>
         </div>
+
+        <details id="stats-section">
+            <summary>Stats</summary>
+            <div id="stats-content">
+                <p>Games played: <span id="games-played-count">0</span></p>
+                <div id="best-scores-list">
+                    <p>Best scores:</p>
+                    <ul>
+                        <li>Easy: <span id="best-easy">-</span></li>
+                        <li>Medium: <span id="best-medium">-</span></li>
+                        <li>Hard: <span id="best-hard">-</span></li>
+                        <li>Insane: <span id="best-insane">-</span></li>
+                    </ul>
+                </div>
+                <button type="button" id="reset-stats-btn">Reset All Stats</button>
+            </div>
+        </details>
     </main>
 
     <script type="module" src="game.js"></script>

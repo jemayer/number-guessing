@@ -1,6 +1,6 @@
 // Number Guessing Game - DOM Controller
 import { generateTargetNumber, evaluateGuess, isValidGuess } from './game-logic.js';
-import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed } from './storage.js';
+import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData } from './storage.js';
 
 const form = document.getElementById('guess-form');
 const input = document.getElementById('guess-input');
@@ -20,6 +20,14 @@ const namePrompt = document.getElementById('name-prompt');
 const playerNameInput = document.getElementById('player-name-input');
 const saveNameBtn = document.getElementById('save-name-btn');
 const skipNameBtn = document.getElementById('skip-name-btn');
+
+// Stats elements
+const gamesPlayedCount = document.getElementById('games-played-count');
+const bestEasy = document.getElementById('best-easy');
+const bestMedium = document.getElementById('best-medium');
+const bestHard = document.getElementById('best-hard');
+const bestInsane = document.getElementById('best-insane');
+const resetStatsBtn = document.getElementById('reset-stats-btn');
 
 let targetNumber;
 let attempts;
@@ -84,6 +92,7 @@ function handleGuess(event) {
         incrementGamesPlayed();
         const isNewRecord = setBestScore(maxNumber, attempts);
         updateBestScoreDisplay();
+        updateStatsDisplay();
 
         if (isNewRecord) {
             winText.textContent = 'New Record! Congratulations!';
@@ -143,6 +152,28 @@ function initPlayerName() {
     }
 }
 
+// Stats functions
+function updateStatsDisplay() {
+    const data = loadGameData();
+
+    gamesPlayedCount.textContent = data.gamesPlayed;
+
+    bestEasy.textContent = data.bestScores[50] ?? '-';
+    bestMedium.textContent = data.bestScores[100] ?? '-';
+    bestHard.textContent = data.bestScores[500] ?? '-';
+    bestInsane.textContent = data.bestScores[1000] ?? '-';
+}
+
+function resetStats() {
+    if (confirm('Are you sure you want to reset all stats? This will clear your name, best scores, and games played.')) {
+        clearGameData();
+        updateStatsDisplay();
+        updateBestScoreDisplay();
+        updatePlayerGreeting();
+        showNamePrompt();
+    }
+}
+
 // Event listeners
 form.addEventListener('submit', handleGuess);
 playAgainButton.addEventListener('click', initGame);
@@ -154,7 +185,9 @@ playerNameInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') saveName();
     if (e.key === 'Escape') skipName();
 });
+resetStatsBtn.addEventListener('click', resetStats);
 
 // Initialize
 initPlayerName();
+updateStatsDisplay();
 initGame();

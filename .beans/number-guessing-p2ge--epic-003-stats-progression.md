@@ -1,10 +1,11 @@
 ---
 # number-guessing-p2ge
 title: 'Epic-003: Stats & Progression'
-status: todo
+status: completed
 type: epic
+priority: normal
 created_at: 2026-02-05T19:34:47Z
-updated_at: 2026-02-05T19:34:47Z
+updated_at: 2026-02-05T19:42:54Z
 ---
 
 Track player progress and statistics using localStorage.

@@ -1,10 +1,11 @@
 ---
 # number-guessing-9o49
 title: Add stats display and reset option
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-05T19:34:58Z
-updated_at: 2026-02-05T19:34:58Z
+updated_at: 2026-02-05T19:42:54Z
 parent: number-guessing-p2ge
 ---
 
