@@ -5,7 +5,11 @@ import {
     getDefaultData,
     clearGameData,
     getPlayerName,
-    setPlayerName
+    setPlayerName,
+    getBestScore,
+    setBestScore,
+    incrementGamesPlayed,
+    getGamesPlayed
 } from './storage.js';
 
 // Mock localStorage
@@ -96,6 +100,83 @@ describe('storage', () => {
             const savedCall = localStorageMock.setItem.mock.calls[0];
             const savedData = JSON.parse(savedCall[1]);
             expect(savedData.playerName).toBe('Diana');
+        });
+    });
+
+    describe('getBestScore', () => {
+        it('returns null when no best score exists', () => {
+            expect(getBestScore(100)).toBe(null);
+        });
+
+        it('returns stored best score', () => {
+            const stored = {
+                playerName: '',
+                gamesPlayed: 1,
+                bestScores: { 50: null, 100: 5, 500: null, 1000: null }
+            };
+            localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
+
+            expect(getBestScore(100)).toBe(5);
+        });
+    });
+
+    describe('setBestScore', () => {
+        it('sets first best score and returns true', () => {
+            const isNewRecord = setBestScore(100, 7);
+
+            expect(isNewRecord).toBe(true);
+            const savedCall = localStorageMock.setItem.mock.calls[0];
+            const savedData = JSON.parse(savedCall[1]);
+            expect(savedData.bestScores[100]).toBe(7);
+        });
+
+        it('updates best score when new score is better', () => {
+            const stored = {
+                playerName: '',
+                gamesPlayed: 1,
+                bestScores: { 50: null, 100: 10, 500: null, 1000: null }
+            };
+            localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
+
+            const isNewRecord = setBestScore(100, 5);
+
+            expect(isNewRecord).toBe(true);
+        });
+
+        it('does not update when new score is worse', () => {
+            const stored = {
+                playerName: '',
+                gamesPlayed: 1,
+                bestScores: { 50: null, 100: 5, 500: null, 1000: null }
+            };
+            localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
+
+            const isNewRecord = setBestScore(100, 10);
+
+            expect(isNewRecord).toBe(false);
+        });
+    });
+
+    describe('incrementGamesPlayed', () => {
+        it('increments games played count', () => {
+            incrementGamesPlayed();
+
+            const savedCall = localStorageMock.setItem.mock.calls[0];
+            const savedData = JSON.parse(savedCall[1]);
+            expect(savedData.gamesPlayed).toBe(1);
+        });
+    });
+
+    describe('getGamesPlayed', () => {
+        it('returns 0 when no games played', () => {
+            expect(getGamesPlayed()).toBe(0);
+        });
+
+        it('returns stored games played count', () => {
+            const stored = { playerName: '', gamesPlayed: 42, bestScores: {} };
+            localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
+
+            expect(getGamesPlayed()).toBe(42);
         });
     });
 });

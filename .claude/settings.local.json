@@ -6,7 +6,8 @@
       "Bash(beans update:*)",
       "Bash(npm init:*)",
       "Bash(brew list:*)",
-      "Bash(npm test:*)"
+      "Bash(npm test:*)",
+      "Bash(beans show:*)"
     ]
   }
 }

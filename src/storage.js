@@ -50,3 +50,34 @@ export function setPlayerName(name) {
     data.playerName = name.trim();
     saveGameData(data);
 }
+
+// Best score functions
+export function getBestScore(maxNumber) {
+    const data = loadGameData();
+    return data.bestScores[maxNumber] || null;
+}
+
+export function setBestScore(maxNumber, attempts) {
+    const data = loadGameData();
+    const currentBest = data.bestScores[maxNumber];
+    const isNewRecord = currentBest === null || attempts < currentBest;
+
+    if (isNewRecord) {
+        data.bestScores[maxNumber] = attempts;
+        saveGameData(data);
+    }
+
+    return isNewRecord;
+}
+
+// Games played tracking
+export function incrementGamesPlayed() {
+    const data = loadGameData();
+    data.gamesPlayed++;
+    saveGameData(data);
+    return data.gamesPlayed;
+}
+
+export function getGamesPlayed() {
+    return loadGameData().gamesPlayed;
+}

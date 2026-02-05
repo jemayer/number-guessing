@@ -1,12 +1,14 @@
 // Number Guessing Game - DOM Controller
 import { generateTargetNumber, evaluateGuess, isValidGuess } from './game-logic.js';
-import { getPlayerName, setPlayerName, loadGameData } from './storage.js';
+import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed } from './storage.js';
 
 const form = document.getElementById('guess-form');
 const input = document.getElementById('guess-input');
 const feedback = document.getElementById('feedback');
 const attemptCount = document.getElementById('attempt-count');
+const bestScoreDisplay = document.getElementById('best-score-display');
 const winMessage = document.getElementById('win-message');
+const winText = document.getElementById('win-text');
 const playAgainButton = document.getElementById('play-again');
 const difficultyButtons = document.querySelectorAll('#difficulty-selector button');
 const maxNumberDisplay = document.getElementById('max-number');
@@ -30,11 +32,22 @@ function initGame() {
     feedback.textContent = '';
     feedback.className = '';
     winMessage.hidden = true;
+    winMessage.classList.remove('new-record');
     input.disabled = false;
     input.max = maxNumber;
     input.value = '';
     input.focus();
     maxNumberDisplay.textContent = maxNumber;
+    updateBestScoreDisplay();
+}
+
+function updateBestScoreDisplay() {
+    const best = getBestScore(maxNumber);
+    if (best !== null) {
+        bestScoreDisplay.textContent = ` | Best: ${best}`;
+    } else {
+        bestScoreDisplay.textContent = '';
+    }
 }
 
 function setDifficulty(event) {
@@ -66,6 +79,18 @@ function handleGuess(event) {
         feedback.className = 'win';
         winMessage.hidden = false;
         input.disabled = true;
+
+        // Track best score
+        incrementGamesPlayed();
+        const isNewRecord = setBestScore(maxNumber, attempts);
+        updateBestScoreDisplay();
+
+        if (isNewRecord) {
+            winText.textContent = 'New Record! Congratulations!';
+            winMessage.classList.add('new-record');
+        } else {
+            winText.textContent = 'Congratulations! You got it!';
+        }
     } else {
         const hint = evaluation.isClose ? " You're getting close!" : '';
         feedback.textContent = evaluation.message + hint;

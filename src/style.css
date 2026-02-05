@@ -219,6 +219,11 @@ button:active {
     color: #4a4a8a;
 }
 
+#best-score-display {
+    color: #667eea;
+    font-weight: 600;
+}
+
 #win-message {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
@@ -230,6 +235,19 @@ button:active {
     font-weight: 600;
     color: #27ae60;
     margin-bottom: 1rem;
+}
+
+#win-message.new-record {
+    background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+    margin-left: -2rem;
+    margin-right: -2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border-top: 2px solid #f1c40f;
+}
+
+#win-message.new-record p {
+    color: #d4a000;
 }
 
 #play-again {

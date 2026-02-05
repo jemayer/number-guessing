@@ -1,10 +1,11 @@
 ---
 # number-guessing-h8lx
 title: Track best score per difficulty
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-05T19:34:55Z
-updated_at: 2026-02-05T19:34:55Z
+updated_at: 2026-02-05T19:41:01Z
 parent: number-guessing-p2ge
 ---
 
