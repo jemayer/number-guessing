@@ -3,7 +3,10 @@
     "allow": [
       "Bash(beans create:*)",
       "Bash(beans list:*)",
-      "Bash(beans update:*)"
+      "Bash(beans update:*)",
+      "Bash(npm init:*)",
+      "Bash(brew list:*)",
+      "Bash(npm test:*)"
     ]
   }
 }

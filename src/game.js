@@ -1,4 +1,5 @@
-// Number Guessing Game Logic
+// Number Guessing Game - DOM Controller
+import { generateTargetNumber, evaluateGuess, isValidGuess } from './game-logic.js';
 
 const form = document.getElementById('guess-form');
 const input = document.getElementById('guess-input');
@@ -13,17 +14,8 @@ let targetNumber;
 let attempts;
 let maxNumber = 100;
 
-function getProximityThreshold() {
-    return Math.floor(maxNumber / 10);
-}
-
-function isClose(guess) {
-    const distance = Math.abs(guess - targetNumber);
-    return distance > 0 && distance <= getProximityThreshold();
-}
-
 function initGame() {
-    targetNumber = Math.floor(Math.random() * maxNumber) + 1;
+    targetNumber = generateTargetNumber(maxNumber);
     attempts = 0;
     attemptCount.textContent = '0';
     feedback.textContent = '';
@@ -50,7 +42,7 @@ function handleGuess(event) {
     event.preventDefault();
 
     const guess = parseInt(input.value, 10);
-    if (isNaN(guess) || guess < 1 || guess > maxNumber) {
+    if (!isValidGuess(guess, maxNumber)) {
         feedback.textContent = `Please enter a number between 1 and ${maxNumber}.`;
         return;
     }
@@ -58,19 +50,17 @@ function handleGuess(event) {
     attempts++;
     attemptCount.textContent = attempts;
 
-    if (guess < targetNumber) {
-        const hint = isClose(guess) ? " You're getting close!" : '';
-        feedback.textContent = 'Higher! Try a bigger number.' + hint;
-        feedback.className = isClose(guess) ? 'higher close' : 'higher';
-    } else if (guess > targetNumber) {
-        const hint = isClose(guess) ? " You're getting close!" : '';
-        feedback.textContent = 'Lower! Try a smaller number.' + hint;
-        feedback.className = isClose(guess) ? 'lower close' : 'lower';
-    } else {
+    const evaluation = evaluateGuess(guess, targetNumber, maxNumber);
+
+    if (evaluation.result === 'correct') {
         feedback.textContent = `You got it in ${attempts} ${attempts === 1 ? 'attempt' : 'attempts'}!`;
         feedback.className = 'win';
         winMessage.hidden = false;
         input.disabled = true;
+    } else {
+        const hint = evaluation.isClose ? " You're getting close!" : '';
+        feedback.textContent = evaluation.message + hint;
+        feedback.className = evaluation.isClose ? `${evaluation.result} close` : evaluation.result;
     }
 
     input.value = '';
