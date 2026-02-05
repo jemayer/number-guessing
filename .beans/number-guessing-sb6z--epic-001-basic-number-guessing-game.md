@@ -1,10 +1,11 @@
 ---
 # number-guessing-sb6z
 title: 'Epic-001: Basic Number Guessing Game'
-status: todo
+status: completed
 type: epic
+priority: normal
 created_at: 2026-02-05T18:53:55Z
-updated_at: 2026-02-05T18:53:55Z
+updated_at: 2026-02-05T19:03:51Z
 ---
 
 A single-page web app where:

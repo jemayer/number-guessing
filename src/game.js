@@ -15,6 +15,7 @@ function initGame() {
     attempts = 0;
     attemptCount.textContent = '0';
     feedback.textContent = '';
+    feedback.className = '';
     winMessage.hidden = true;
     input.disabled = false;
     input.value = '';
@@ -35,10 +36,13 @@ function handleGuess(event) {
 
     if (guess < targetNumber) {
         feedback.textContent = 'Higher! Try a bigger number.';
+        feedback.className = 'higher';
     } else if (guess > targetNumber) {
         feedback.textContent = 'Lower! Try a smaller number.';
+        feedback.className = 'lower';
     } else {
         feedback.textContent = `You got it in ${attempts} ${attempts === 1 ? 'attempt' : 'attempts'}!`;
+        feedback.className = 'win';
         winMessage.hidden = false;
         input.disabled = true;
     }
