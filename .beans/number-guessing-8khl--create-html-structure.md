@@ -1,10 +1,11 @@
 ---
 # number-guessing-8khl
 title: Create HTML structure
-status: todo
+status: completed
 type: task
+priority: normal
 created_at: 2026-02-05T18:54:14Z
-updated_at: 2026-02-05T18:54:14Z
+updated_at: 2026-02-05T18:59:58Z
 parent: number-guessing-sb6z
 ---
 

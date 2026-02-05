@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Number Guessing Game</h1>
+        <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+
+        <form id="guess-form">
+            <input
+                type="number"
+                id="guess-input"
+                min="1"
+                max="100"
+                placeholder="Enter your guess"
+                required
+                autofocus
+            >
+            <button type="submit">Guess</button>
+        </form>
+
+        <div id="feedback" aria-live="polite"></div>
+
+        <p id="attempts">Attempts: <span id="attempt-count">0</span></p>
+
+        <div id="win-message" hidden>
+            <p>Congratulations! You got it!</p>
+            <button id="play-again">Play Again</button>
+        </div>
+    </main>
+
+    <script src="game.js"></script>
+</body>
+</html>
