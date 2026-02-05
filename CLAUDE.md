@@ -12,6 +12,14 @@ This is an experimental project to explore agentic development workflows. The ap
 2. **Tickets for work** - All implementation work starts with a ticket via Beans (`beans new`)
 3. **Skills capture learnings** - Patterns and guidance live in `skills/`
 
+### Testing Requirements
+
+- **Run tests before committing** - Execute `npm test` and ensure all tests pass
+- **Never commit with failing tests** - Fix the code or update the test first
+- **New logic needs tests** - Game logic changes should include corresponding tests
+
+See ADR-003 for testing strategy details.
+
 ### Key Principles
 
 - **Collaboration over generation** - Discuss and refine, don't just produce
@@ -47,4 +55,5 @@ Tickets are markdown files in `.beans/` - can be edited directly.
 
 - Vanilla HTML, CSS, JavaScript (no build step) - see ADR-001
 - Beans for file-based ticketing - see ADR-002
+- Vitest for testing - see ADR-003
 - Local-first development (GitHub integration later)
