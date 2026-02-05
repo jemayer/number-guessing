@@ -1,10 +1,11 @@
 ---
 # number-guessing-9hns
 title: Add proximity hints
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-05T19:08:23Z
-updated_at: 2026-02-05T19:08:23Z
+updated_at: 2026-02-05T19:12:09Z
 parent: number-guessing-4zvr
 ---
 

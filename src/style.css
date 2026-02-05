@@ -126,6 +126,10 @@ button:active {
     color: #27ae60;
 }
 
+#feedback.close::after {
+    content: " 🔥";
+}
+
 #attempts {
     color: #888;
     font-size: 0.9rem;

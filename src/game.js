@@ -13,6 +13,15 @@ let targetNumber;
 let attempts;
 let maxNumber = 100;
 
+function getProximityThreshold() {
+    return Math.floor(maxNumber / 10);
+}
+
+function isClose(guess) {
+    const distance = Math.abs(guess - targetNumber);
+    return distance > 0 && distance <= getProximityThreshold();
+}
+
 function initGame() {
     targetNumber = Math.floor(Math.random() * maxNumber) + 1;
     attempts = 0;
@@ -50,11 +59,13 @@ function handleGuess(event) {
     attemptCount.textContent = attempts;
 
     if (guess < targetNumber) {
-        feedback.textContent = 'Higher! Try a bigger number.';
-        feedback.className = 'higher';
+        const hint = isClose(guess) ? " You're getting close!" : '';
+        feedback.textContent = 'Higher! Try a bigger number.' + hint;
+        feedback.className = isClose(guess) ? 'higher close' : 'higher';
     } else if (guess > targetNumber) {
-        feedback.textContent = 'Lower! Try a smaller number.';
-        feedback.className = 'lower';
+        const hint = isClose(guess) ? " You're getting close!" : '';
+        feedback.textContent = 'Lower! Try a smaller number.' + hint;
+        feedback.className = isClose(guess) ? 'lower close' : 'lower';
     } else {
         feedback.textContent = `You got it in ${attempts} ${attempts === 1 ? 'attempt' : 'attempts'}!`;
         feedback.className = 'win';
