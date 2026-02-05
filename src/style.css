@@ -26,9 +26,33 @@ main {
 }
 
 h1 {
-    margin: 0 0 0.5rem;
+    margin: 0 0 1rem;
     color: #4a4a8a;
     font-size: 1.75rem;
+}
+
+#difficulty-selector {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#difficulty-selector button {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.85rem;
+    background: #e8e8f0;
+    color: #666;
+}
+
+#difficulty-selector button:hover {
+    background: #d8d8e8;
+}
+
+#difficulty-selector button.active {
+    background: #667eea;
+    color: white;
 }
 
 p {

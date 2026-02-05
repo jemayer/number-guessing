@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(beans create:*)",
+      "Bash(beans list:*)",
+      "Bash(beans update:*)"
+    ]
+  }
+}

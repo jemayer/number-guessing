@@ -9,7 +9,15 @@
 <body>
     <main>
         <h1>Number Guessing Game</h1>
-        <p>I'm thinking of a number between 1 and 100. Can you guess it?</p>
+
+        <div id="difficulty-selector">
+            <button type="button" data-max="50">Easy</button>
+            <button type="button" data-max="100" class="active">Medium</button>
+            <button type="button" data-max="500">Hard</button>
+            <button type="button" data-max="1000">Insane</button>
+        </div>
+
+        <p>I'm thinking of a number between 1 and <span id="max-number">100</span>. Can you guess it?</p>
 
         <form id="guess-form">
             <input
