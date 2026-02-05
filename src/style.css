@@ -26,9 +26,80 @@ main {
 }
 
 h1 {
-    margin: 0 0 1rem;
+    margin: 0 0 0.5rem;
     color: #4a4a8a;
     font-size: 1.75rem;
+}
+
+#player-section {
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+#player-greeting {
+    margin-right: 0.5rem;
+}
+
+#change-name-btn {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    background: transparent;
+    color: #667eea;
+    border: 1px solid #667eea;
+}
+
+#change-name-btn:hover {
+    background: #667eea;
+    color: white;
+}
+
+#name-prompt {
+    background: #f8f8fc;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+#name-prompt label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #4a4a8a;
+}
+
+#name-form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#player-name-input {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 0.5rem;
+    width: 120px;
+    text-align: center;
+}
+
+#player-name-input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+#name-form button {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+}
+
+#skip-name-btn {
+    background: #999;
+}
+
+#skip-name-btn:hover {
+    background: #777;
 }
 
 #difficulty-selector {

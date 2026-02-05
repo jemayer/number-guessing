@@ -1,10 +1,11 @@
 ---
 # number-guessing-hp5y
 title: Add player name setup
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-05T19:34:53Z
-updated_at: 2026-02-05T19:34:53Z
+updated_at: 2026-02-05T19:37:18Z
 parent: number-guessing-p2ge
 ---
 

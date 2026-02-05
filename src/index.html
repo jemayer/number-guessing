@@ -10,6 +10,20 @@
     <main>
         <h1>Number Guessing Game</h1>
 
+        <div id="player-section">
+            <span id="player-greeting"></span>
+            <button type="button" id="change-name-btn" hidden>Change</button>
+        </div>
+
+        <div id="name-prompt" hidden>
+            <label for="player-name-input">Enter your name:</label>
+            <div id="name-form">
+                <input type="text" id="player-name-input" placeholder="Your name" maxlength="20">
+                <button type="button" id="save-name-btn">Save</button>
+                <button type="button" id="skip-name-btn">Skip</button>
+            </div>
+        </div>
+
         <div id="difficulty-selector">
             <button type="button" data-max="50">Easy</button>
             <button type="button" data-max="100" class="active">Medium</button>
