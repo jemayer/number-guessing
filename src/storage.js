@@ -93,3 +93,20 @@ export function setLimitedMode(enabled) {
     data.limitedMode = enabled;
     saveGameData(data);
 }
+
+// Theme preference
+export function getTheme() {
+    const data = loadGameData();
+    if (data.theme) return data.theme;
+    // Respect system preference as default
+    if (typeof window !== 'undefined' && window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
+        return 'dark';
+    }
+    return 'light';
+}
+
+export function setTheme(theme) {
+    const data = loadGameData();
+    data.theme = theme;
+    saveGameData(data);
+}

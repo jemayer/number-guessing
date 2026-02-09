@@ -1,6 +1,6 @@
 // Number Guessing Game - DOM Controller
 import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver } from './game-logic.js';
-import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData, getLimitedMode, setLimitedMode } from './storage.js';
+import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData, getLimitedMode, setLimitedMode, getTheme, setTheme } from './storage.js';
 
 const form = document.getElementById('guess-form');
 const input = document.getElementById('guess-input');
@@ -36,6 +36,9 @@ const guessLimitInfo = document.getElementById('guess-limit-info');
 const gameOverMessage = document.getElementById('game-over-message');
 const revealNumber = document.getElementById('reveal-number');
 const tryAgainButton = document.getElementById('try-again');
+
+// Theme elements
+const themeToggle = document.getElementById('theme-toggle');
 
 let targetNumber;
 let attempts;
@@ -220,6 +223,23 @@ function initLimitedMode() {
     updateGuessLimitDisplay();
 }
 
+// Theme functions
+function applyTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+}
+
+function toggleTheme() {
+    const current = getTheme();
+    const next = current === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    applyTheme(next);
+}
+
+function initTheme() {
+    applyTheme(getTheme());
+}
+
 // Event listeners
 form.addEventListener('submit', handleGuess);
 playAgainButton.addEventListener('click', initGame);
@@ -234,8 +254,10 @@ playerNameInput.addEventListener('keydown', (e) => {
 resetStatsBtn.addEventListener('click', resetStats);
 limitedModeCheckbox.addEventListener('change', toggleLimitedMode);
 tryAgainButton.addEventListener('click', initGame);
+themeToggle.addEventListener('click', toggleTheme);
 
 // Initialize
+initTheme();
 initPlayerName();
 initLimitedMode();
 updateStatsDisplay();

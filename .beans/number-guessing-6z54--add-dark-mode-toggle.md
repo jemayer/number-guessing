@@ -1,10 +1,11 @@
 ---
 # number-guessing-6z54
 title: Add dark mode toggle
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-09T11:53:17Z
-updated_at: 2026-02-09T11:53:17Z
+updated_at: 2026-02-09T12:01:05Z
 parent: number-guessing-6nf3
 ---
 

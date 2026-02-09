@@ -2,39 +2,124 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --card-bg: white;
+    --card-shadow: rgba(0, 0, 0, 0.2);
+    --text-primary: #333;
+    --text-secondary: #666;
+    --text-muted: #888;
+    --accent: #667eea;
+    --accent-hover: #5a6fd6;
+    --heading: #4a4a8a;
+    --border: #ddd;
+    --border-light: #eee;
+    --input-disabled-bg: #f5f5f5;
+    --input-disabled-color: #999;
+    --surface: #f8f8fc;
+    --difficulty-bg: #e8e8f0;
+    --difficulty-hover: #d8d8e8;
+    --higher: #e67e22;
+    --lower: #3498db;
+    --win: #27ae60;
+    --win-hover: #219a52;
+    --danger: #e74c3c;
+    --danger-hover: #c0392b;
+    --record-bg-start: #fff9e6;
+    --record-bg-end: #fff3cc;
+    --record-border: #f1c40f;
+    --record-text: #d4a000;
+    --skip-bg: #999;
+    --skip-hover: #777;
+}
+
+[data-theme="dark"] {
+    --bg-gradient-start: #1a1a2e;
+    --bg-gradient-end: #16213e;
+    --card-bg: #1e1e2e;
+    --card-shadow: rgba(0, 0, 0, 0.5);
+    --text-primary: #e0e0e0;
+    --text-secondary: #aaa;
+    --text-muted: #888;
+    --accent: #7c8cf0;
+    --accent-hover: #6b7ce6;
+    --heading: #a0a0d0;
+    --border: #444;
+    --border-light: #333;
+    --input-disabled-bg: #2a2a3a;
+    --input-disabled-color: #666;
+    --surface: #252538;
+    --difficulty-bg: #2a2a40;
+    --difficulty-hover: #353550;
+    --higher: #f0a050;
+    --lower: #5dade2;
+    --win: #2ecc71;
+    --win-hover: #27ae60;
+    --danger: #e74c3c;
+    --danger-hover: #c0392b;
+    --record-bg-start: #3a3520;
+    --record-bg-end: #3a3520;
+    --record-border: #f1c40f;
+    --record-text: #f0d060;
+    --skip-bg: #555;
+    --skip-hover: #666;
+}
+
 body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: var(--text-primary);
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
     min-height: 100vh;
     margin: 0;
     padding: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.3s;
 }
 
 main {
-    background: white;
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 1rem;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 40px var(--card-shadow);
     max-width: 400px;
     width: 100%;
     text-align: center;
+    transition: background 0.3s, box-shadow 0.3s;
 }
 
 h1 {
     margin: 0 0 0.5rem;
-    color: #4a4a8a;
+    color: var(--heading);
     font-size: 1.75rem;
+}
+
+#theme-toggle {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-secondary);
+    padding: 0.4rem 0.6rem;
+    font-size: 1.1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+    line-height: 1;
+}
+
+#theme-toggle:hover {
+    background: var(--surface);
 }
 
 #player-section {
     margin-bottom: 1rem;
     font-size: 0.9rem;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 #player-greeting {
@@ -45,17 +130,17 @@ h1 {
     padding: 0.2rem 0.5rem;
     font-size: 0.75rem;
     background: transparent;
-    color: #667eea;
-    border: 1px solid #667eea;
+    color: var(--accent);
+    border: 1px solid var(--accent);
 }
 
 #change-name-btn:hover {
-    background: #667eea;
+    background: var(--accent);
     color: white;
 }
 
 #name-prompt {
-    background: #f8f8fc;
+    background: var(--surface);
     padding: 1rem;
     border-radius: 0.5rem;
     margin-bottom: 1rem;
@@ -65,7 +150,7 @@ h1 {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 600;
-    color: #4a4a8a;
+    color: var(--heading);
 }
 
 #name-form {
@@ -78,15 +163,17 @@ h1 {
 #player-name-input {
     padding: 0.5rem;
     font-size: 1rem;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border);
     border-radius: 0.5rem;
     width: 120px;
     text-align: center;
+    background: var(--card-bg);
+    color: var(--text-primary);
 }
 
 #player-name-input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--accent);
 }
 
 #name-form button {
@@ -95,11 +182,11 @@ h1 {
 }
 
 #skip-name-btn {
-    background: #999;
+    background: var(--skip-bg);
 }
 
 #skip-name-btn:hover {
-    background: #777;
+    background: var(--skip-hover);
 }
 
 #difficulty-selector {
@@ -113,16 +200,16 @@ h1 {
 #difficulty-selector button {
     padding: 0.4rem 0.75rem;
     font-size: 0.85rem;
-    background: #e8e8f0;
-    color: #666;
+    background: var(--difficulty-bg);
+    color: var(--text-secondary);
 }
 
 #difficulty-selector button:hover {
-    background: #d8d8e8;
+    background: var(--difficulty-hover);
 }
 
 #difficulty-selector button.active {
-    background: #667eea;
+    background: var(--accent);
     color: white;
 }
 
@@ -133,12 +220,12 @@ h1 {
     gap: 0.5rem;
     margin-bottom: 1rem;
     font-size: 0.85rem;
-    color: #666;
+    color: var(--text-secondary);
     cursor: pointer;
 }
 
 #mode-toggle input[type="checkbox"] {
-    accent-color: #667eea;
+    accent-color: var(--accent);
     width: 1rem;
     height: 1rem;
 }
@@ -146,35 +233,35 @@ h1 {
 #game-over-message {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 2px solid #e74c3c;
+    border-top: 2px solid var(--danger);
 }
 
 #game-over-message p {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #e74c3c;
+    color: var(--danger);
     margin-bottom: 1rem;
 }
 
 #reveal-number {
-    color: #667eea;
+    color: var(--accent);
 }
 
 #try-again {
-    background: #e74c3c;
+    background: var(--danger);
 }
 
 #try-again:hover {
-    background: #c0392b;
+    background: var(--danger-hover);
 }
 
 #feedback.game-over {
-    color: #e74c3c;
+    color: var(--danger);
 }
 
 p {
     margin: 0 0 1.5rem;
-    color: #666;
+    color: var(--text-secondary);
 }
 
 #guess-form {
@@ -187,11 +274,13 @@ p {
     flex: 1;
     padding: 0.75rem 1rem;
     font-size: 1.25rem;
-    border: 2px solid #ddd;
+    border: 2px solid var(--border);
     border-radius: 0.5rem;
     text-align: center;
     transition: border-color 0.2s;
     -moz-appearance: textfield;
+    background: var(--card-bg);
+    color: var(--text-primary);
 }
 
 #guess-input::-webkit-outer-spin-button,
@@ -202,12 +291,12 @@ p {
 
 #guess-input:focus {
     outline: none;
-    border-color: #667eea;
+    border-color: var(--accent);
 }
 
 #guess-input:disabled {
-    background: #f5f5f5;
-    color: #999;
+    background: var(--input-disabled-bg);
+    color: var(--input-disabled-color);
 }
 
 button {
@@ -215,7 +304,7 @@ button {
     font-size: 1rem;
     font-weight: 600;
     color: white;
-    background: #667eea;
+    background: var(--accent);
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
@@ -223,7 +312,7 @@ button {
 }
 
 button:hover {
-    background: #5a6fd6;
+    background: var(--accent-hover);
 }
 
 button:active {
@@ -239,15 +328,15 @@ button:active {
 }
 
 #feedback.higher {
-    color: #e67e22;
+    color: var(--higher);
 }
 
 #feedback.lower {
-    color: #3498db;
+    color: var(--lower);
 }
 
 #feedback.win {
-    color: #27ae60;
+    color: var(--win);
 }
 
 #feedback.close::after {
@@ -255,83 +344,83 @@ button:active {
 }
 
 #attempts {
-    color: #888;
+    color: var(--text-muted);
     font-size: 0.9rem;
     margin: 0;
 }
 
 #attempt-count {
     font-weight: 700;
-    color: #4a4a8a;
+    color: var(--heading);
 }
 
 #best-score-display {
-    color: #667eea;
+    color: var(--accent);
     font-weight: 600;
 }
 
 #win-message {
     margin-top: 1.5rem;
     padding-top: 1.5rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-light);
 }
 
 #win-message p {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #27ae60;
+    color: var(--win);
     margin-bottom: 1rem;
 }
 
 #win-message.new-record {
-    background: linear-gradient(135deg, #fff9e6 0%, #fff3cc 100%);
+    background: linear-gradient(135deg, var(--record-bg-start) 0%, var(--record-bg-end) 100%);
     margin-left: -2rem;
     margin-right: -2rem;
     padding-left: 2rem;
     padding-right: 2rem;
-    border-top: 2px solid #f1c40f;
+    border-top: 2px solid var(--record-border);
 }
 
 #win-message.new-record p {
-    color: #d4a000;
+    color: var(--record-text);
 }
 
 #play-again {
-    background: #27ae60;
+    background: var(--win);
 }
 
 #play-again:hover {
-    background: #219a52;
+    background: var(--win-hover);
 }
 
 #stats-section {
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--border-light);
     text-align: left;
 }
 
 #stats-section summary {
     cursor: pointer;
     font-weight: 600;
-    color: #667eea;
+    color: var(--accent);
     text-align: center;
 }
 
 #stats-section summary:hover {
-    color: #5a6fd6;
+    color: var(--accent-hover);
 }
 
 #stats-content {
     margin-top: 1rem;
     padding: 1rem;
-    background: #f8f8fc;
+    background: var(--surface);
     border-radius: 0.5rem;
 }
 
 #stats-content p {
     margin: 0 0 0.5rem;
-    color: #555;
+    color: var(--text-secondary);
     font-size: 0.9rem;
 }
 
@@ -345,20 +434,20 @@ button:active {
 }
 
 #best-scores-list li {
-    color: #666;
+    color: var(--text-secondary);
     font-size: 0.85rem;
     margin-bottom: 0.25rem;
 }
 
 #reset-stats-btn {
     width: 100%;
-    background: #e74c3c;
+    background: var(--danger);
     font-size: 0.85rem;
     padding: 0.5rem;
 }
 
 #reset-stats-btn:hover {
-    background: #c0392b;
+    background: var(--danger-hover);
 }
 
 @media (max-width: 480px) {
