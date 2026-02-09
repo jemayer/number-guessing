@@ -31,6 +31,11 @@
             <button type="button" data-max="1000">Insane</button>
         </div>
 
+        <label id="mode-toggle">
+            <input type="checkbox" id="limited-mode-checkbox">
+            <span>Challenge mode (<span id="guess-limit-display">10</span> guesses)</span>
+        </label>
+
         <p>I'm thinking of a number between 1 and <span id="max-number">100</span>. Can you guess it?</p>
 
         <form id="guess-form">
@@ -49,13 +54,18 @@
         <div id="feedback" aria-live="polite"></div>
 
         <p id="attempts">
-            Attempts: <span id="attempt-count">0</span>
+            Attempts: <span id="attempt-count">0</span><span id="guess-limit-info"></span>
             <span id="best-score-display"></span>
         </p>
 
         <div id="win-message" hidden>
             <p id="win-text">Congratulations! You got it!</p>
             <button id="play-again">Play Again</button>
+        </div>
+
+        <div id="game-over-message" hidden>
+            <p>Game Over! The number was <span id="reveal-number"></span>.</p>
+            <button id="try-again">Try Again</button>
         </div>
 
         <details id="stats-section">

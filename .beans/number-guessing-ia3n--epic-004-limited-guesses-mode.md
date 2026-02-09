@@ -1,10 +1,11 @@
 ---
 # number-guessing-ia3n
 title: 'Epic-004: Limited Guesses Mode'
-status: todo
+status: completed
 type: epic
+priority: normal
 created_at: 2026-02-09T11:51:43Z
-updated_at: 2026-02-09T11:51:43Z
+updated_at: 2026-02-09T11:56:49Z
 ---
 
 Add an optional limited guesses mode that adds tension and challenge.

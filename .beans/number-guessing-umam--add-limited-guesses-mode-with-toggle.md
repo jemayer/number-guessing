@@ -1,10 +1,11 @@
 ---
 # number-guessing-umam
 title: Add limited guesses mode with toggle
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-09T11:51:52Z
-updated_at: 2026-02-09T11:51:52Z
+updated_at: 2026-02-09T11:56:49Z
 parent: number-guessing-ia3n
 ---
 

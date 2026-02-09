@@ -38,3 +38,18 @@ export function evaluateGuess(guess, targetNumber, maxNumber) {
 export function isValidGuess(guess, maxNumber) {
     return !isNaN(guess) && guess >= 1 && guess <= maxNumber;
 }
+
+const GUESS_LIMITS = {
+    50: 8,
+    100: 10,
+    500: 13,
+    1000: 15
+};
+
+export function getGuessLimit(maxNumber) {
+    return GUESS_LIMITS[maxNumber] || 10;
+}
+
+export function isGameOver(attempts, maxNumber) {
+    return attempts >= getGuessLimit(maxNumber);
+}

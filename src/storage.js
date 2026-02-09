@@ -28,7 +28,8 @@ export function getDefaultData() {
             500: null,
             1000: null
         },
-        gamesPlayed: 0
+        gamesPlayed: 0,
+        limitedMode: false
     };
 }
 
@@ -80,4 +81,15 @@ export function incrementGamesPlayed() {
 
 export function getGamesPlayed() {
     return loadGameData().gamesPlayed;
+}
+
+// Limited mode preference
+export function getLimitedMode() {
+    return loadGameData().limitedMode || false;
+}
+
+export function setLimitedMode(enabled) {
+    const data = loadGameData();
+    data.limitedMode = enabled;
+    saveGameData(data);
 }

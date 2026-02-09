@@ -1,6 +1,6 @@
 // Number Guessing Game - DOM Controller
-import { generateTargetNumber, evaluateGuess, isValidGuess } from './game-logic.js';
-import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData } from './storage.js';
+import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver } from './game-logic.js';
+import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData, getLimitedMode, setLimitedMode } from './storage.js';
 
 const form = document.getElementById('guess-form');
 const input = document.getElementById('guess-input');
@@ -29,9 +29,18 @@ const bestHard = document.getElementById('best-hard');
 const bestInsane = document.getElementById('best-insane');
 const resetStatsBtn = document.getElementById('reset-stats-btn');
 
+// Limited mode elements
+const limitedModeCheckbox = document.getElementById('limited-mode-checkbox');
+const guessLimitDisplay = document.getElementById('guess-limit-display');
+const guessLimitInfo = document.getElementById('guess-limit-info');
+const gameOverMessage = document.getElementById('game-over-message');
+const revealNumber = document.getElementById('reveal-number');
+const tryAgainButton = document.getElementById('try-again');
+
 let targetNumber;
 let attempts;
 let maxNumber = 100;
+let limitedMode = false;
 
 function initGame() {
     targetNumber = generateTargetNumber(maxNumber);
@@ -41,12 +50,14 @@ function initGame() {
     feedback.className = '';
     winMessage.hidden = true;
     winMessage.classList.remove('new-record');
+    gameOverMessage.hidden = true;
     input.disabled = false;
     input.max = maxNumber;
     input.value = '';
     input.focus();
     maxNumberDisplay.textContent = maxNumber;
     updateBestScoreDisplay();
+    updateGuessLimitDisplay();
 }
 
 function updateBestScoreDisplay() {
@@ -104,10 +115,20 @@ function handleGuess(event) {
         const hint = evaluation.isClose ? " You're getting close!" : '';
         feedback.textContent = evaluation.message + hint;
         feedback.className = evaluation.isClose ? `${evaluation.result} close` : evaluation.result;
+
+        // Check for game over in limited mode
+        if (limitedMode && isGameOver(attempts, maxNumber)) {
+            feedback.textContent = 'Out of guesses!';
+            feedback.className = 'game-over';
+            gameOverMessage.hidden = false;
+            revealNumber.textContent = targetNumber;
+            input.disabled = true;
+        }
     }
 
+    updateGuessLimitDisplay();
     input.value = '';
-    input.focus();
+    if (!input.disabled) input.focus();
 }
 
 // Player name functions
@@ -174,6 +195,31 @@ function resetStats() {
     }
 }
 
+// Limited mode functions
+function updateGuessLimitDisplay() {
+    const limit = getGuessLimit(maxNumber);
+    guessLimitDisplay.textContent = limit;
+
+    if (limitedMode) {
+        const remaining = limit - attempts;
+        guessLimitInfo.textContent = ` / ${limit}`;
+    } else {
+        guessLimitInfo.textContent = '';
+    }
+}
+
+function toggleLimitedMode() {
+    limitedMode = limitedModeCheckbox.checked;
+    setLimitedMode(limitedMode);
+    initGame();
+}
+
+function initLimitedMode() {
+    limitedMode = getLimitedMode();
+    limitedModeCheckbox.checked = limitedMode;
+    updateGuessLimitDisplay();
+}
+
 // Event listeners
 form.addEventListener('submit', handleGuess);
 playAgainButton.addEventListener('click', initGame);
@@ -186,8 +232,11 @@ playerNameInput.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') skipName();
 });
 resetStatsBtn.addEventListener('click', resetStats);
+limitedModeCheckbox.addEventListener('change', toggleLimitedMode);
+tryAgainButton.addEventListener('click', initGame);
 
 // Initialize
 initPlayerName();
+initLimitedMode();
 updateStatsDisplay();
 initGame();

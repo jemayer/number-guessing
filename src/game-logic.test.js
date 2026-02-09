@@ -4,7 +4,9 @@ import {
     getProximityThreshold,
     isClose,
     evaluateGuess,
-    isValidGuess
+    isValidGuess,
+    getGuessLimit,
+    isGameOver
 } from './game-logic.js';
 
 describe('generateTargetNumber', () => {
@@ -115,5 +117,39 @@ describe('isValidGuess', () => {
 
     it('rejects NaN', () => {
         expect(isValidGuess(NaN, 100)).toBe(false);
+    });
+});
+
+describe('getGuessLimit', () => {
+    it('returns 8 for easy mode', () => {
+        expect(getGuessLimit(50)).toBe(8);
+    });
+
+    it('returns 10 for medium mode', () => {
+        expect(getGuessLimit(100)).toBe(10);
+    });
+
+    it('returns 13 for hard mode', () => {
+        expect(getGuessLimit(500)).toBe(13);
+    });
+
+    it('returns 15 for insane mode', () => {
+        expect(getGuessLimit(1000)).toBe(15);
+    });
+});
+
+describe('isGameOver', () => {
+    it('returns false when attempts are below limit', () => {
+        expect(isGameOver(5, 100)).toBe(false);
+        expect(isGameOver(9, 100)).toBe(false);
+    });
+
+    it('returns true when attempts reach limit', () => {
+        expect(isGameOver(10, 100)).toBe(true);
+        expect(isGameOver(8, 50)).toBe(true);
+    });
+
+    it('returns true when attempts exceed limit', () => {
+        expect(isGameOver(11, 100)).toBe(true);
     });
 });
