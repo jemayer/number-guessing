@@ -24,4 +24,8 @@ writeFileSync('dist/index.html', html);
 // Copy CSS
 copyFileSync('src/style.css', 'dist/style.css');
 
+// Copy background SVGs
+copyFileSync('src/bg-light.svg', 'dist/bg-light.svg');
+copyFileSync('src/bg-dark.svg', 'dist/bg-dark.svg');
+
 console.log('Build complete! Open dist/index.html in your browser.');
