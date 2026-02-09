@@ -1,10 +1,11 @@
 ---
 # number-guessing-m0gl
 title: Add animations for game feedback
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-09T11:53:13Z
-updated_at: 2026-02-09T11:53:13Z
+updated_at: 2026-02-09T12:08:00Z
 parent: number-guessing-6nf3
 ---
 

@@ -40,6 +40,9 @@ const tryAgainButton = document.getElementById('try-again');
 // Theme elements
 const themeToggle = document.getElementById('theme-toggle');
 
+// Confetti container
+const confettiContainer = document.getElementById('confetti-container');
+
 let targetNumber;
 let attempts;
 let maxNumber = 100;
@@ -82,6 +85,29 @@ function setDifficulty(event) {
     initGame();
 }
 
+function shakeInput() {
+    input.classList.remove('shake');
+    // Force reflow so re-adding the class triggers the animation again
+    void input.offsetWidth;
+    input.classList.add('shake');
+    input.addEventListener('animationend', () => input.classList.remove('shake'), { once: true });
+}
+
+function spawnConfetti() {
+    confettiContainer.innerHTML = '';
+    const colors = ['#f1c40f', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6', '#e67e22'];
+    for (let i = 0; i < 40; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('confetti-piece');
+        piece.style.left = `${Math.random() * 100}%`;
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDuration = `${1 + Math.random() * 2}s`;
+        piece.style.animationDelay = `${Math.random() * 0.5}s`;
+        confettiContainer.appendChild(piece);
+    }
+    setTimeout(() => { confettiContainer.innerHTML = ''; }, 4000);
+}
+
 function handleGuess(event) {
     event.preventDefault();
 
@@ -108,6 +134,8 @@ function handleGuess(event) {
         updateBestScoreDisplay();
         updateStatsDisplay();
 
+        spawnConfetti();
+
         if (isNewRecord) {
             winText.textContent = 'New Record! Congratulations!';
             winMessage.classList.add('new-record');
@@ -115,6 +143,8 @@ function handleGuess(event) {
             winText.textContent = 'Congratulations! You got it!';
         }
     } else {
+        shakeInput();
+
         const hint = evaluation.isClose ? " You're getting close!" : '';
         feedback.textContent = evaluation.message + hint;
         feedback.className = evaluation.isClose ? `${evaluation.result} close` : evaluation.result;
