@@ -92,9 +92,11 @@ function setDifficulty(event) {
 
 function updateHeatBar(guess) {
     const warmth = getWarmth(guess, targetNumber, maxNumber);
+    // Cubic curve so the bar stays blue longer and only turns red when truly close
+    const displayWarmth = warmth * warmth * warmth;
     heatBar.hidden = false;
-    heatFill.style.width = `${Math.round(warmth * 100)}%`;
-    heatFill.style.backgroundColor = getHeatColor(warmth);
+    heatFill.style.width = `${Math.round(displayWarmth * 100)}%`;
+    heatFill.style.backgroundColor = getHeatColor(displayWarmth);
 }
 
 function resetHeatBar() {
