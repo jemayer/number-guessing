@@ -35,6 +35,12 @@ export function evaluateGuess(guess, targetNumber, maxNumber) {
     }
 }
 
+export function getWarmth(guess, targetNumber, maxNumber) {
+    const distance = Math.abs(guess - targetNumber);
+    const maxDistance = maxNumber - 1;
+    return 1 - distance / maxDistance;
+}
+
 export function isValidGuess(guess, maxNumber) {
     return !isNaN(guess) && guess >= 1 && guess <= maxNumber;
 }

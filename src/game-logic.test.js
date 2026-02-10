@@ -4,6 +4,7 @@ import {
     getProximityThreshold,
     isClose,
     evaluateGuess,
+    getWarmth,
     isValidGuess,
     getGuessLimit,
     isGameOver
@@ -95,6 +96,36 @@ describe('evaluateGuess', () => {
         const result = evaluateGuess(20, 50, 100);
         expect(result.result).toBe('higher');
         expect(result.isClose).toBe(false);
+    });
+});
+
+describe('getWarmth', () => {
+    it('returns 1 for an exact match', () => {
+        expect(getWarmth(50, 50, 100)).toBe(1);
+    });
+
+    it('returns 0 for the farthest possible guess', () => {
+        expect(getWarmth(1, 100, 100)).toBeCloseTo(0, 1);
+        expect(getWarmth(100, 1, 100)).toBeCloseTo(0, 1);
+    });
+
+    it('returns ~0.5 for a guess halfway through the range', () => {
+        expect(getWarmth(50, 100, 100)).toBeCloseTo(0.495, 2);
+    });
+
+    it('increases as guess gets closer to target', () => {
+        const far = getWarmth(10, 80, 100);
+        const mid = getWarmth(50, 80, 100);
+        const near = getWarmth(75, 80, 100);
+        expect(near).toBeGreaterThan(mid);
+        expect(mid).toBeGreaterThan(far);
+    });
+
+    it('works across different difficulty ranges', () => {
+        // Same relative distance should give same warmth
+        const warmth100 = getWarmth(50, 100, 100);
+        const warmth1000 = getWarmth(500, 1000, 1000);
+        expect(warmth100).toBeCloseTo(warmth1000, 2);
     });
 });
 

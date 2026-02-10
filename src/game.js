@@ -1,5 +1,5 @@
 // Number Guessing Game - DOM Controller
-import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver } from './game-logic.js';
+import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver, getWarmth } from './game-logic.js';
 import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData, getLimitedMode, setLimitedMode, getTheme, setTheme } from './storage.js';
 
 const form = document.getElementById('guess-form');
@@ -40,6 +40,10 @@ const tryAgainButton = document.getElementById('try-again');
 // Theme elements
 const themeToggle = document.getElementById('theme-toggle');
 
+// Heat bar elements
+const heatBar = document.getElementById('heat-bar');
+const heatFill = document.getElementById('heat-fill');
+
 // Confetti container
 const confettiContainer = document.getElementById('confetti-container');
 
@@ -64,6 +68,7 @@ function initGame() {
     maxNumberDisplay.textContent = maxNumber;
     updateBestScoreDisplay();
     updateGuessLimitDisplay();
+    resetHeatBar();
 }
 
 function updateBestScoreDisplay() {
@@ -83,6 +88,19 @@ function setDifficulty(event) {
     button.classList.add('active');
 
     initGame();
+}
+
+function updateHeatBar(guess) {
+    const warmth = getWarmth(guess, targetNumber, maxNumber);
+    heatBar.hidden = false;
+    heatFill.style.width = `${Math.round(warmth * 100)}%`;
+    // Shift gradient position: 100% = cold (shows blue), 0% = hot (shows red)
+    heatFill.style.backgroundPosition = `${(1 - warmth) * 100}% 0`;
+}
+
+function resetHeatBar() {
+    heatBar.hidden = true;
+    heatFill.style.width = '0%';
 }
 
 function shakeInput() {
@@ -144,6 +162,7 @@ function handleGuess(event) {
         }
     } else {
         shakeInput();
+        updateHeatBar(guess);
 
         const hint = evaluation.isClose ? " You're getting close!" : '';
         feedback.textContent = evaluation.message + hint;
