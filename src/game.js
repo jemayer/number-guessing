@@ -94,8 +94,8 @@ function updateHeatBar(guess) {
     const warmth = getWarmth(guess, targetNumber, maxNumber);
     heatBar.hidden = false;
     heatFill.style.width = `${Math.round(warmth * 100)}%`;
-    // Shift gradient position: 100% = cold (shows blue), 0% = hot (shows red)
-    heatFill.style.backgroundPosition = `${(1 - warmth) * 100}% 0`;
+    // Shift gradient position: 0% = cold (shows blue), 100% = hot (shows red)
+    heatFill.style.backgroundPosition = `${warmth * 100}% 0`;
 }
 
 function resetHeatBar() {
