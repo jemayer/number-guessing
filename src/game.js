@@ -1,5 +1,5 @@
 // Number Guessing Game - DOM Controller
-import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver, getWarmth } from './game-logic.js';
+import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver, getWarmth, getHeatColor } from './game-logic.js';
 import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData, getLimitedMode, setLimitedMode, getTheme, setTheme } from './storage.js';
 
 const form = document.getElementById('guess-form');
@@ -94,8 +94,7 @@ function updateHeatBar(guess) {
     const warmth = getWarmth(guess, targetNumber, maxNumber);
     heatBar.hidden = false;
     heatFill.style.width = `${Math.round(warmth * 100)}%`;
-    // Shift gradient position: 0% = cold (shows blue), 100% = hot (shows red)
-    heatFill.style.backgroundPosition = `${warmth * 100}% 0`;
+    heatFill.style.backgroundColor = getHeatColor(warmth);
 }
 
 function resetHeatBar() {

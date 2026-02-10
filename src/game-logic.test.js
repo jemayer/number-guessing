@@ -5,6 +5,7 @@ import {
     isClose,
     evaluateGuess,
     getWarmth,
+    getHeatColor,
     isValidGuess,
     getGuessLimit,
     isGameOver
@@ -126,6 +127,32 @@ describe('getWarmth', () => {
         const warmth100 = getWarmth(50, 100, 100);
         const warmth1000 = getWarmth(500, 1000, 1000);
         expect(warmth100).toBeCloseTo(warmth1000, 2);
+    });
+});
+
+describe('getHeatColor', () => {
+    it('returns blue when coldest', () => {
+        expect(getHeatColor(0)).toBe('rgb(52, 152, 219)');
+    });
+
+    it('returns yellow at midpoint', () => {
+        expect(getHeatColor(0.5)).toBe('rgb(241, 196, 15)');
+    });
+
+    it('returns red when hottest', () => {
+        expect(getHeatColor(1)).toBe('rgb(231, 76, 60)');
+    });
+
+    it('blends blue-to-yellow in the cold half', () => {
+        const color = getHeatColor(0.25);
+        // Should be halfway between blue and yellow
+        expect(color).toBe('rgb(147, 174, 117)');
+    });
+
+    it('blends yellow-to-red in the hot half', () => {
+        const color = getHeatColor(0.75);
+        // Should be halfway between yellow and red
+        expect(color).toBe('rgb(236, 136, 38)');
     });
 });
 

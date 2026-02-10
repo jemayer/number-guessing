@@ -41,6 +41,29 @@ export function getWarmth(guess, targetNumber, maxNumber) {
     return 1 - distance / maxDistance;
 }
 
+export function getHeatColor(warmth) {
+    // Three zones: blue (cold) → yellow (mid) → red (hot)
+    const blue = [52, 152, 219];   // #3498db
+    const yellow = [241, 196, 15]; // #f1c40f
+    const red = [231, 76, 60];     // #e74c3c
+
+    let from, to, t;
+    if (warmth <= 0.5) {
+        from = blue;
+        to = yellow;
+        t = warmth / 0.5;
+    } else {
+        from = yellow;
+        to = red;
+        t = (warmth - 0.5) / 0.5;
+    }
+
+    const r = Math.round(from[0] + (to[0] - from[0]) * t);
+    const g = Math.round(from[1] + (to[1] - from[1]) * t);
+    const b = Math.round(from[2] + (to[2] - from[2]) * t);
+    return `rgb(${r}, ${g}, ${b})`;
+}
+
 export function isValidGuess(guess, maxNumber) {
     return !isNaN(guess) && guess >= 1 && guess <= maxNumber;
 }
