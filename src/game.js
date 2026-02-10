@@ -99,9 +99,18 @@ function updateHeatBar(guess) {
     heatFill.style.backgroundColor = getHeatColor(displayWarmth);
 }
 
+function flashHeatBar() {
+    heatBar.hidden = false;
+    heatFill.style.width = '100%';
+    heatFill.style.backgroundColor = '#27ae60';
+    heatFill.classList.add('win');
+}
+
 function resetHeatBar() {
     heatBar.hidden = true;
     heatFill.style.width = '0%';
+    heatFill.style.backgroundColor = '';
+    heatFill.classList.remove('win');
 }
 
 function shakeInput() {
@@ -154,6 +163,7 @@ function handleGuess(event) {
         updateStatsDisplay();
 
         spawnConfetti();
+        flashHeatBar();
 
         if (isNewRecord) {
             winText.textContent = 'New Record! Congratulations!';
