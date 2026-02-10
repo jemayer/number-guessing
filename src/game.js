@@ -316,19 +316,6 @@ limitedModeCheckbox.addEventListener('change', toggleLimitedMode);
 tryAgainButton.addEventListener('click', initGame);
 themeToggle.addEventListener('click', toggleTheme);
 
-// Keyboard shortcuts (only when guess input is not focused)
-const difficultyKeys = { '1': 0, '2': 1, '3': 2, '4': 3 };
-
-document.addEventListener('keydown', (e) => {
-    if (document.activeElement === input || document.activeElement === playerNameInput) return;
-
-    if (e.key.toLowerCase() === 'n') {
-        initGame();
-    } else if (e.key in difficultyKeys) {
-        difficultyButtons[difficultyKeys[e.key]].click();
-    }
-});
-
 // Initialize
 initTheme();
 initPlayerName();
