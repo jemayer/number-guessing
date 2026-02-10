@@ -1,11 +1,11 @@
 ---
 # number-guessing-d0aq
 title: Add keyboard shortcuts
-status: in-progress
+status: scrapped
 type: feature
 priority: normal
 created_at: 2026-02-10T18:49:22Z
-updated_at: 2026-02-10T19:28:53Z
+updated_at: 2026-02-10T19:32:14Z
 parent: number-guessing-js5y
 ---
 

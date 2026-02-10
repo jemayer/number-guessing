@@ -12,6 +12,10 @@ This is an experimental project to explore agentic development workflows. The ap
 2. **Tickets for work** - All implementation work starts with a ticket via Beans (`beans new`)
 3. **Skills capture learnings** - Patterns and guidance live in `skills/`
 
+### Commit Conventions
+
+- **Separate logical boundaries** - Don't mix unrelated changes in a single commit. For example, ticket/epic creation gets its own commit, implementation gets another.
+
 ### Testing Requirements
 
 - **Run tests before committing** - Execute `npm test` and ensure all tests pass
