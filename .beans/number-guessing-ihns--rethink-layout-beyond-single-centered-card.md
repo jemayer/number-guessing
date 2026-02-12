@@ -1,10 +1,11 @@
 ---
 # number-guessing-ihns
 title: Rethink layout beyond single centered card
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-10T21:05:37Z
-updated_at: 2026-02-10T21:05:37Z
+updated_at: 2026-02-12T16:40:11Z
 parent: number-guessing-kxbe
 ---
 
@@ -24,4 +25,3 @@ The single centered card works but doesn't use screen real estate creatively. Ev
 - Secondary UI (stats, settings, difficulty) is accessible but doesn't crowd the main experience
 - Layout works well on both mobile and desktop
 - Feels more like a game screen than a form
-

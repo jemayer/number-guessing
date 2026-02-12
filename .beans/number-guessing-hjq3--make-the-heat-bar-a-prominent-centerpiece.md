@@ -1,10 +1,11 @@
 ---
 # number-guessing-hjq3
 title: Make the heat bar a prominent centerpiece
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-10T21:05:36Z
-updated_at: 2026-02-10T21:05:36Z
+updated_at: 2026-02-12T16:40:11Z
 parent: number-guessing-kxbe
 ---
 
@@ -23,4 +24,3 @@ The hot/cold mechanic is the most interesting part of the game, but the heat bar
 - The heat bar is visually prominent and immediately draws the eye
 - Warmth/coolness is communicated through more than just bar width (color, glow, animation, etc.)
 - The transition between states feels smooth and satisfying
-

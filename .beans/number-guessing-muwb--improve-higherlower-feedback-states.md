@@ -1,10 +1,11 @@
 ---
 # number-guessing-muwb
 title: Improve higher/lower feedback states
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-10T21:05:36Z
-updated_at: 2026-02-10T21:05:36Z
+updated_at: 2026-02-12T16:40:11Z
 parent: number-guessing-kxbe
 ---
 
@@ -24,4 +25,3 @@ The "higher"/"lower" feedback currently just changes text color (orange/blue). T
 - Higher/lower direction is communicated visually, not just through text
 - Getting close feels exciting and tense
 - Winning feels like a genuine payoff
-
