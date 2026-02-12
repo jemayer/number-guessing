@@ -17,7 +17,7 @@
     --border: rgba(0, 0, 0, 0.1);
 
     --gauge-track: rgba(0, 0, 0, 0.07);
-    --gauge-size: 260px;
+    --gauge-size: min(260px, 40dvh);
 
     --higher: #ea580c;
     --lower: #2563eb;
@@ -89,9 +89,9 @@ body {
     line-height: 1.5;
     color: var(--text);
     background: var(--bg);
-    min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
-    align-items: center;
+    align-items: safe center;
     justify-content: center;
     padding: 1.5rem;
     position: relative;
@@ -786,9 +786,31 @@ button:active {
 
 /* ---- Responsive ---- */
 
+@media (max-height: 700px) {
+    body {
+        padding: 0.75rem;
+    }
+
+    main {
+        gap: 0.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    #feedback-zone {
+        min-height: 2.5rem;
+    }
+
+    #game-core {
+        margin: 0.25rem 0;
+    }
+}
+
 @media (max-width: 480px) {
     :root {
-        --gauge-size: 220px;
+        --gauge-size: min(220px, 40dvh);
     }
 
     h1 {
