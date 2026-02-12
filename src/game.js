@@ -40,9 +40,17 @@ const tryAgainButton = document.getElementById('try-again');
 // Theme elements
 const themeToggle = document.getElementById('theme-toggle');
 
-// Heat bar elements
-const heatBar = document.getElementById('heat-bar');
-const heatFill = document.getElementById('heat-fill');
+// Heat gauge elements
+const heatGauge = document.getElementById('heat-gauge');
+const gaugeFill = document.querySelector('.gauge-fill');
+const heatGlow = document.getElementById('heat-glow');
+const GAUGE_ARC = 415.4;
+
+// Direction arrow
+const directionArrow = document.getElementById('direction-arrow');
+
+// Atmosphere
+const atmosphere = document.getElementById('atmosphere');
 
 // Confetti container
 const confettiContainer = document.getElementById('confetti-container');
@@ -92,25 +100,40 @@ function setDifficulty(event) {
 
 function updateHeatBar(guess) {
     const warmth = getWarmth(guess, targetNumber, maxNumber);
-    // Cubic curve so the bar stays blue longer and only turns red when truly close
+    // Cubic curve so the gauge stays blue longer and only turns red when truly close
     const displayWarmth = warmth * warmth * warmth;
-    heatBar.hidden = false;
-    heatFill.style.width = `${Math.round(displayWarmth * 100)}%`;
-    heatFill.style.backgroundColor = getHeatColor(displayWarmth);
+    const heatColor = getHeatColor(displayWarmth);
+
+    gaugeFill.style.strokeDashoffset = GAUGE_ARC * (1 - displayWarmth);
+    gaugeFill.style.stroke = heatColor;
+    heatGlow.style.setProperty('--heat-color', heatColor);
+    heatGlow.style.opacity = displayWarmth * 0.7;
+
+    atmosphere.style.setProperty('--atmo-color', heatColor);
+    atmosphere.style.opacity = displayWarmth * 0.15;
 }
 
 function flashHeatBar() {
-    heatBar.hidden = false;
-    heatFill.style.width = '100%';
-    heatFill.style.backgroundColor = '#27ae60';
-    heatFill.classList.add('win');
+    gaugeFill.style.strokeDashoffset = '0';
+    gaugeFill.style.stroke = '#16a34a';
+    heatGauge.classList.add('win');
+    heatGlow.style.setProperty('--heat-color', '#16a34a');
+    heatGlow.style.opacity = '1';
+
+    atmosphere.style.setProperty('--atmo-color', '#16a34a');
+    atmosphere.style.opacity = '0.12';
 }
 
 function resetHeatBar() {
-    heatBar.hidden = true;
-    heatFill.style.width = '0%';
-    heatFill.style.backgroundColor = '';
-    heatFill.classList.remove('win');
+    gaugeFill.style.strokeDashoffset = GAUGE_ARC;
+    gaugeFill.style.stroke = '';
+    heatGauge.classList.remove('win');
+    heatGlow.style.opacity = '0';
+
+    directionArrow.className = '';
+    directionArrow.textContent = '';
+
+    atmosphere.style.opacity = '0';
 }
 
 function shakeInput() {
@@ -162,6 +185,9 @@ function handleGuess(event) {
         updateBestScoreDisplay();
         updateStatsDisplay();
 
+        directionArrow.className = '';
+        directionArrow.textContent = '';
+
         spawnConfetti();
         flashHeatBar();
 
@@ -174,6 +200,12 @@ function handleGuess(event) {
     } else {
         shakeInput();
         updateHeatBar(guess);
+
+        // Update direction arrow
+        directionArrow.className = '';
+        void directionArrow.offsetWidth;
+        directionArrow.textContent = evaluation.result === 'higher' ? '\u25B2' : '\u25BC';
+        directionArrow.className = evaluation.result + (evaluation.isClose ? ' close' : '');
 
         const hint = evaluation.isClose ? " You're getting close!" : '';
         feedback.textContent = evaluation.message + hint;

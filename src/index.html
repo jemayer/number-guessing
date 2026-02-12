@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Overpass+Mono:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="atmosphere" aria-hidden="true"></div>
+
     <button type="button" id="theme-toggle" aria-label="Toggle dark mode"></button>
 
     <main>
-        <h1>Number Guessing Game</h1>
-
         <div id="player-section">
             <span id="player-greeting"></span>
             <button type="button" id="change-name-btn" hidden>Change</button>
@@ -26,6 +29,10 @@
             </div>
         </div>
 
+        <h1>Guess the Number</h1>
+
+        <p id="range-text">Between 1 and <span id="max-number">100</span></p>
+
         <div id="difficulty-selector">
             <button type="button" data-max="50">Easy</button>
             <button type="button" data-max="100" class="active">Medium</button>
@@ -38,26 +45,41 @@
             <span>Challenge mode (<span id="guess-limit-display">10</span> guesses)</span>
         </label>
 
-        <p>I'm thinking of a number between 1 and <span id="max-number">100</span>. Can you guess it?</p>
+        <div id="game-core">
+            <div id="heat-gauge">
+                <svg id="heat-ring" viewBox="0 0 200 200" aria-hidden="true">
+                    <circle class="gauge-track" cx="100" cy="100" r="85"
+                        fill="none" stroke-width="14" stroke-linecap="round"
+                        stroke-dasharray="415.4 534.1"
+                        transform="rotate(130 100 100)" />
+                    <circle class="gauge-fill" cx="100" cy="100" r="85"
+                        fill="none" stroke-width="14" stroke-linecap="round"
+                        stroke-dasharray="415.4 534.1"
+                        stroke-dashoffset="415.4"
+                        transform="rotate(130 100 100)" />
+                </svg>
+                <div id="heat-glow" aria-hidden="true"></div>
+                <div id="gauge-center">
+                    <form id="guess-form">
+                        <input
+                            type="number"
+                            id="guess-input"
+                            min="1"
+                            max="100"
+                            placeholder="?"
+                            required
+                            autofocus
+                        >
+                        <button type="submit" id="guess-btn">Guess</button>
+                    </form>
+                </div>
+            </div>
 
-        <form id="guess-form">
-            <input
-                type="number"
-                id="guess-input"
-                min="1"
-                max="100"
-                placeholder="Enter your guess"
-                required
-                autofocus
-            >
-            <button type="submit">Guess</button>
-        </form>
-
-        <div id="heat-bar" hidden>
-            <div id="heat-fill"></div>
+            <div id="feedback-zone">
+                <div id="direction-arrow" aria-hidden="true"></div>
+                <div id="feedback" aria-live="polite"></div>
+            </div>
         </div>
-
-        <div id="feedback" aria-live="polite"></div>
 
         <p id="attempts">
             Attempts: <span id="attempt-count">0</span><span id="guess-limit-info"></span>
@@ -77,17 +99,29 @@
         <details id="stats-section">
             <summary>Stats</summary>
             <div id="stats-content">
-                <p>Games played: <span id="games-played-count">0</span></p>
-                <div id="best-scores-list">
-                    <p>Best scores:</p>
-                    <ul>
-                        <li>Easy: <span id="best-easy">-</span></li>
-                        <li>Medium: <span id="best-medium">-</span></li>
-                        <li>Hard: <span id="best-hard">-</span></li>
-                        <li>Insane: <span id="best-insane">-</span></li>
-                    </ul>
+                <div id="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-value" id="games-played-count">0</span>
+                        <span class="stat-label">Played</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="best-easy">-</span>
+                        <span class="stat-label">Easy</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="best-medium">-</span>
+                        <span class="stat-label">Medium</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="best-hard">-</span>
+                        <span class="stat-label">Hard</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-value" id="best-insane">-</span>
+                        <span class="stat-label">Insane</span>
+                    </div>
                 </div>
-                <button type="button" id="reset-stats-btn">Reset All Stats</button>
+                <button type="button" id="reset-stats-btn">Reset Stats</button>
             </div>
         </details>
     </main>
