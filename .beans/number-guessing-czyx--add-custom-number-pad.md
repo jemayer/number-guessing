@@ -1,10 +1,11 @@
 ---
 # number-guessing-czyx
 title: Add custom number pad
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-14T10:11:10Z
-updated_at: 2026-02-14T10:11:10Z
+updated_at: 2026-02-14T10:13:20Z
 parent: number-guessing-iu48
 ---
 
