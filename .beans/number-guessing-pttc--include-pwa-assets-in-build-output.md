@@ -1,10 +1,11 @@
 ---
 # number-guessing-pttc
 title: Include PWA assets in build output
-status: todo
+status: completed
 type: task
+priority: normal
 created_at: 2026-02-14T09:19:07Z
-updated_at: 2026-02-14T09:19:07Z
+updated_at: 2026-02-14T09:34:56Z
 parent: number-guessing-du97
 ---
 

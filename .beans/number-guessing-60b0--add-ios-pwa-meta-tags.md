@@ -1,10 +1,11 @@
 ---
 # number-guessing-60b0
 title: Add iOS PWA meta tags
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-14T09:18:52Z
-updated_at: 2026-02-14T09:18:52Z
+updated_at: 2026-02-14T09:35:27Z
 parent: number-guessing-du97
 ---
 

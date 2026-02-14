@@ -1,10 +1,11 @@
 ---
 # number-guessing-58x6
 title: Add service worker for offline support
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-10T18:49:31Z
-updated_at: 2026-02-10T18:49:31Z
+updated_at: 2026-02-14T09:36:22Z
 parent: number-guessing-du97
 ---
 

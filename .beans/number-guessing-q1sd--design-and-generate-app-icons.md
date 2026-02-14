@@ -1,10 +1,11 @@
 ---
 # number-guessing-q1sd
 title: Design and generate app icons
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-14T09:18:31Z
-updated_at: 2026-02-14T09:18:31Z
+updated_at: 2026-02-14T09:34:37Z
 parent: number-guessing-du97
 ---
 
@@ -17,4 +18,3 @@ Create SVG-based app icons that match the game's visual identity (heat gauge aes
 Store icons in `public/icons/`. The SVG source should be kept alongside the PNGs for future re-export.
 
 Consider making the 512px version maskable (safe zone: centered content within inner 80% circle) so Android adaptive icons crop cleanly.
-

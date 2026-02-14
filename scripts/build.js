@@ -1,5 +1,5 @@
 import * as esbuild from 'esbuild';
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'fs';
 
 // Ensure dist directory exists
 mkdirSync('dist', { recursive: true });
@@ -27,5 +27,15 @@ copyFileSync('src/style.css', 'dist/style.css');
 // Copy background SVGs
 copyFileSync('src/bg-light.svg', 'dist/bg-light.svg');
 copyFileSync('src/bg-dark.svg', 'dist/bg-dark.svg');
+
+// Copy PWA assets
+copyFileSync('src/manifest.json', 'dist/manifest.json');
+copyFileSync('src/sw.js', 'dist/sw.js');
+
+// Copy icons
+mkdirSync('dist/icons', { recursive: true });
+for (const file of readdirSync('src/icons')) {
+    copyFileSync(`src/icons/${file}`, `dist/icons/${file}`);
+}
 
 console.log('Build complete! Open dist/index.html in your browser.');
