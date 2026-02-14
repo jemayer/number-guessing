@@ -1,10 +1,11 @@
 ---
 # number-guessing-vl66
 title: Replace challenge mode checkbox with custom toggle switch
-status: todo
+status: completed
 type: feature
+priority: normal
 created_at: 2026-02-14T10:19:55Z
-updated_at: 2026-02-14T10:19:55Z
+updated_at: 2026-02-14T10:20:59Z
 parent: number-guessing-iu48
 ---
 

@@ -33,7 +33,10 @@
         </div>
 
         <label id="mode-toggle">
-            <input type="checkbox" id="limited-mode-checkbox">
+            <input type="checkbox" id="limited-mode-checkbox" role="switch">
+            <span class="toggle-track" aria-hidden="true">
+                <span class="toggle-thumb"></span>
+            </span>
             <span>Challenge mode (<span id="guess-limit-display">10</span> guesses)</span>
         </label>
 
