@@ -28,3 +28,10 @@ npm-debug.log*
 
 # Test coverage
 coverage/
+
+# Vibe coding
+CLAUDE.md
+.claude/
+.vibe/
+.mcp.json
+settings.json
