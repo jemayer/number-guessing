@@ -30,8 +30,6 @@ npm-debug.log*
 coverage/
 
 # Vibe coding
-.beans/
-.beans.yml
 CLAUDE.md
 .claude/
 .vibe/
