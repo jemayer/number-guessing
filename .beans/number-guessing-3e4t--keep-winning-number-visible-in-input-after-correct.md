@@ -1,10 +1,11 @@
 ---
 # number-guessing-3e4t
 title: Keep winning number visible in input after correct guess
-status: todo
+status: completed
 type: bug
+priority: normal
 created_at: 2026-02-14T10:48:53Z
-updated_at: 2026-02-14T10:48:53Z
+updated_at: 2026-02-14T10:49:22Z
 parent: number-guessing-iu48
 ---
 

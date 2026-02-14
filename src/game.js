@@ -222,8 +222,10 @@ function handleGuess(event) {
     }
 
     updateGuessLimitDisplay();
-    input.value = '';
-    if (!input.disabled) input.focus();
+    if (!input.disabled) {
+        input.value = '';
+        input.focus();
+    }
 }
 
 // Stats functions
