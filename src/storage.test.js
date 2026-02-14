@@ -4,8 +4,6 @@ import {
     saveGameData,
     getDefaultData,
     clearGameData,
-    getPlayerName,
-    setPlayerName,
     getBestScore,
     setBestScore,
     incrementGamesPlayed,
@@ -34,7 +32,6 @@ describe('storage', () => {
     describe('getDefaultData', () => {
         it('returns correct default structure', () => {
             const data = getDefaultData();
-            expect(data.playerName).toBe('');
             expect(data.gamesPlayed).toBe(0);
             expect(data.bestScores).toEqual({
                 50: null,
@@ -52,18 +49,17 @@ describe('storage', () => {
         });
 
         it('returns stored data when available', () => {
-            const stored = { playerName: 'Alice', gamesPlayed: 5, bestScores: {} };
+            const stored = { gamesPlayed: 5, bestScores: {} };
             localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
 
             const data = loadGameData();
-            expect(data.playerName).toBe('Alice');
             expect(data.gamesPlayed).toBe(5);
         });
     });
 
     describe('saveGameData', () => {
         it('saves data to localStorage', () => {
-            const data = { playerName: 'Bob', gamesPlayed: 3, bestScores: {} };
+            const data = { gamesPlayed: 3, bestScores: {} };
             saveGameData(data);
 
             expect(localStorageMock.setItem).toHaveBeenCalledWith(
@@ -80,29 +76,6 @@ describe('storage', () => {
         });
     });
 
-    describe('getPlayerName', () => {
-        it('returns empty string when no name set', () => {
-            expect(getPlayerName()).toBe('');
-        });
-
-        it('returns stored name', () => {
-            const stored = { playerName: 'Charlie', gamesPlayed: 0, bestScores: {} };
-            localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
-
-            expect(getPlayerName()).toBe('Charlie');
-        });
-    });
-
-    describe('setPlayerName', () => {
-        it('saves trimmed name', () => {
-            setPlayerName('  Diana  ');
-
-            const savedCall = localStorageMock.setItem.mock.calls[0];
-            const savedData = JSON.parse(savedCall[1]);
-            expect(savedData.playerName).toBe('Diana');
-        });
-    });
-
     describe('getBestScore', () => {
         it('returns null when no best score exists', () => {
             expect(getBestScore(100)).toBe(null);
@@ -110,7 +83,6 @@ describe('storage', () => {
 
         it('returns stored best score', () => {
             const stored = {
-                playerName: '',
                 gamesPlayed: 1,
                 bestScores: { 50: null, 100: 5, 500: null, 1000: null }
             };
@@ -132,7 +104,6 @@ describe('storage', () => {
 
         it('updates best score when new score is better', () => {
             const stored = {
-                playerName: '',
                 gamesPlayed: 1,
                 bestScores: { 50: null, 100: 10, 500: null, 1000: null }
             };
@@ -145,7 +116,6 @@ describe('storage', () => {
 
         it('does not update when new score is worse', () => {
             const stored = {
-                playerName: '',
                 gamesPlayed: 1,
                 bestScores: { 50: null, 100: 5, 500: null, 1000: null }
             };
@@ -173,7 +143,7 @@ describe('storage', () => {
         });
 
         it('returns stored games played count', () => {
-            const stored = { playerName: '', gamesPlayed: 42, bestScores: {} };
+            const stored = { gamesPlayed: 42, bestScores: {} };
             localStorageMock.getItem.mockReturnValueOnce(JSON.stringify(stored));
 
             expect(getGamesPlayed()).toBe(42);

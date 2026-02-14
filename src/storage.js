@@ -21,7 +21,6 @@ export function saveGameData(data) {
 
 export function getDefaultData() {
     return {
-        playerName: '',
         bestScores: {
             50: null,
             100: null,
@@ -39,17 +38,6 @@ export function clearGameData() {
     } catch {
         // Ignore errors
     }
-}
-
-// Convenience functions
-export function getPlayerName() {
-    return loadGameData().playerName;
-}
-
-export function setPlayerName(name) {
-    const data = loadGameData();
-    data.playerName = name.trim();
-    saveGameData(data);
 }
 
 // Best score functions

@@ -34,8 +34,6 @@
     --record-border: #eab308;
     --record-text: #a16207;
 
-    --skip-bg: #9ca3af;
-    --skip-hover: #6b7280;
 }
 
 [data-theme="dark"] {
@@ -62,8 +60,6 @@
     --record-border: #eab308;
     --record-text: #fbbf24;
 
-    --skip-bg: #4b5563;
-    --skip-hover: #6b7280;
 }
 
 /* ---- Atmosphere ---- */
@@ -153,91 +149,6 @@ h1 {
 #theme-toggle:hover {
     background: var(--accent-soft);
     transform: scale(1.1);
-}
-
-/* ---- Player Section ---- */
-
-#player-section {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    min-height: 1.3rem;
-}
-
-#player-greeting {
-    margin-right: 0.5rem;
-}
-
-#change-name-btn {
-    padding: 0.15rem 0.5rem;
-    font-size: 0.7rem;
-    background: transparent;
-    color: var(--accent);
-    border: 1px solid var(--accent);
-    border-radius: 99px;
-    font-family: var(--font-mono);
-}
-
-#change-name-btn:hover {
-    background: var(--accent);
-    color: white;
-}
-
-/* ---- Name Prompt ---- */
-
-#name-prompt {
-    background: var(--surface-solid);
-    padding: 1.25rem;
-    border-radius: 1rem;
-    border: 1px solid var(--border);
-    width: 100%;
-}
-
-#name-prompt label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 700;
-    color: var(--text);
-    font-size: 0.9rem;
-}
-
-#name-form {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-#player-name-input {
-    padding: 0.5rem;
-    font-size: 1rem;
-    font-family: var(--font-mono);
-    border: 2px solid var(--border);
-    border-radius: 0.5rem;
-    width: 140px;
-    text-align: center;
-    background: var(--bg);
-    color: var(--text);
-    transition: border-color 0.2s;
-}
-
-#player-name-input:focus {
-    outline: none;
-    border-color: var(--accent);
-}
-
-#name-form button {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    border-radius: 0.5rem;
-}
-
-#skip-name-btn {
-    background: var(--skip-bg);
-}
-
-#skip-name-btn:hover {
-    background: var(--skip-hover);
 }
 
 /* ---- Difficulty Selector ---- */

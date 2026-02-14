@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
+    <meta name="theme-color" content="#4f46e5">
+    <link rel="manifest" href="manifest.json">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Num Guess">
+    <link rel="apple-touch-icon" href="icons/icon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Overpass+Mono:wght@400;600;700&display=swap" rel="stylesheet">
@@ -15,20 +21,6 @@
     <button type="button" id="theme-toggle" aria-label="Toggle dark mode"></button>
 
     <main>
-        <div id="player-section">
-            <span id="player-greeting"></span>
-            <button type="button" id="change-name-btn" hidden>Change</button>
-        </div>
-
-        <div id="name-prompt" hidden>
-            <label for="player-name-input">Enter your name:</label>
-            <div id="name-form">
-                <input type="text" id="player-name-input" placeholder="Your name" maxlength="20">
-                <button type="button" id="save-name-btn">Save</button>
-                <button type="button" id="skip-name-btn">Skip</button>
-            </div>
-        </div>
-
         <h1>Guess the Number</h1>
 
         <p id="range-text">Between 1 and <span id="max-number">100</span></p>

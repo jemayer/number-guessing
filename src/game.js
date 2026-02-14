@@ -1,6 +1,6 @@
 // Number Guessing Game - DOM Controller
 import { generateTargetNumber, evaluateGuess, isValidGuess, getGuessLimit, isGameOver, getWarmth, getHeatColor } from './game-logic.js';
-import { getPlayerName, setPlayerName, loadGameData, getBestScore, setBestScore, incrementGamesPlayed, getGamesPlayed, clearGameData, getLimitedMode, setLimitedMode, getTheme, setTheme } from './storage.js';
+import { loadGameData, getBestScore, setBestScore, incrementGamesPlayed, clearGameData, getLimitedMode, setLimitedMode, getTheme, setTheme } from './storage.js';
 
 const form = document.getElementById('guess-form');
 const input = document.getElementById('guess-input');
@@ -12,14 +12,6 @@ const winText = document.getElementById('win-text');
 const playAgainButton = document.getElementById('play-again');
 const difficultyButtons = document.querySelectorAll('#difficulty-selector button');
 const maxNumberDisplay = document.getElementById('max-number');
-
-// Player name elements
-const playerGreeting = document.getElementById('player-greeting');
-const changeNameBtn = document.getElementById('change-name-btn');
-const namePrompt = document.getElementById('name-prompt');
-const playerNameInput = document.getElementById('player-name-input');
-const saveNameBtn = document.getElementById('save-name-btn');
-const skipNameBtn = document.getElementById('skip-name-btn');
 
 // Stats elements
 const gamesPlayedCount = document.getElementById('games-played-count');
@@ -226,48 +218,6 @@ function handleGuess(event) {
     if (!input.disabled) input.focus();
 }
 
-// Player name functions
-function updatePlayerGreeting() {
-    const name = getPlayerName();
-    if (name) {
-        playerGreeting.textContent = `Playing as ${name}`;
-        changeNameBtn.hidden = false;
-        namePrompt.hidden = true;
-    } else {
-        playerGreeting.textContent = '';
-        changeNameBtn.hidden = true;
-    }
-}
-
-function showNamePrompt() {
-    namePrompt.hidden = false;
-    playerNameInput.value = getPlayerName();
-    playerNameInput.focus();
-}
-
-function saveName() {
-    setPlayerName(playerNameInput.value);
-    namePrompt.hidden = true;
-    updatePlayerGreeting();
-    input.focus();
-}
-
-function skipName() {
-    namePrompt.hidden = true;
-    updatePlayerGreeting();
-    input.focus();
-}
-
-function initPlayerName() {
-    const data = loadGameData();
-    // Show name prompt on first visit (no data stored yet)
-    if (!data.playerName && data.gamesPlayed === 0) {
-        showNamePrompt();
-    } else {
-        updatePlayerGreeting();
-    }
-}
-
 // Stats functions
 function updateStatsDisplay() {
     const data = loadGameData();
@@ -281,12 +231,10 @@ function updateStatsDisplay() {
 }
 
 function resetStats() {
-    if (confirm('Are you sure you want to reset all stats? This will clear your name, best scores, and games played.')) {
+    if (confirm('Are you sure you want to reset all stats? This will clear your best scores and games played.')) {
         clearGameData();
         updateStatsDisplay();
         updateBestScoreDisplay();
-        updatePlayerGreeting();
-        showNamePrompt();
     }
 }
 
@@ -336,13 +284,6 @@ function initTheme() {
 form.addEventListener('submit', handleGuess);
 playAgainButton.addEventListener('click', initGame);
 difficultyButtons.forEach(btn => btn.addEventListener('click', setDifficulty));
-changeNameBtn.addEventListener('click', showNamePrompt);
-saveNameBtn.addEventListener('click', saveName);
-skipNameBtn.addEventListener('click', skipName);
-playerNameInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') saveName();
-    if (e.key === 'Escape') skipName();
-});
 resetStatsBtn.addEventListener('click', resetStats);
 limitedModeCheckbox.addEventListener('change', toggleLimitedMode);
 tryAgainButton.addEventListener('click', initGame);
@@ -350,7 +291,11 @@ themeToggle.addEventListener('click', toggleTheme);
 
 // Initialize
 initTheme();
-initPlayerName();
 initLimitedMode();
 updateStatsDisplay();
 initGame();
+
+// Register service worker
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+}
