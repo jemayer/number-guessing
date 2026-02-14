@@ -333,6 +333,56 @@ h1 {
     text-transform: uppercase;
 }
 
+/* ---- Number Pad ---- */
+
+#numpad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 260px;
+}
+
+.num-key {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    padding: 0.75rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    color: var(--text);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background 0.15s, transform 0.1s;
+}
+
+.num-key:hover {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.num-key--back {
+    color: var(--text-muted);
+}
+
+.num-key--submit {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}
+
+.num-key--submit:hover {
+    background: var(--accent-hover);
+    color: white;
+}
+
+#numpad.disabled .num-key {
+    opacity: 0.35;
+    pointer-events: none;
+}
+
 /* ---- Buttons (base) ---- */
 
 button {
@@ -716,6 +766,11 @@ button:active {
 
     #game-core {
         margin: 0.25rem 0;
+    }
+
+    .num-key {
+        font-size: 1rem;
+        padding: 0.6rem;
     }
 }
 

@@ -47,10 +47,18 @@ const atmosphere = document.getElementById('atmosphere');
 // Confetti container
 const confettiContainer = document.getElementById('confetti-container');
 
+// Number pad
+const numpad = document.getElementById('numpad');
+
 let targetNumber;
 let attempts;
 let maxNumber = 100;
 let limitedMode = false;
+
+function setInputDisabled(disabled) {
+    input.disabled = disabled;
+    numpad.classList.toggle('disabled', disabled);
+}
 
 function initGame() {
     targetNumber = generateTargetNumber(maxNumber);
@@ -61,7 +69,7 @@ function initGame() {
     winMessage.hidden = true;
     winMessage.classList.remove('new-record');
     gameOverMessage.hidden = true;
-    input.disabled = false;
+    setInputDisabled(false);
     input.max = maxNumber;
     input.value = '';
     input.focus();
@@ -169,7 +177,7 @@ function handleGuess(event) {
         feedback.textContent = `You got it in ${attempts} ${attempts === 1 ? 'attempt' : 'attempts'}!`;
         feedback.className = 'win';
         winMessage.hidden = false;
-        input.disabled = true;
+        setInputDisabled(true);
 
         // Track best score
         incrementGamesPlayed();
@@ -209,7 +217,7 @@ function handleGuess(event) {
             feedback.className = 'game-over';
             gameOverMessage.hidden = false;
             revealNumber.textContent = targetNumber;
-            input.disabled = true;
+            setInputDisabled(true);
         }
     }
 
@@ -280,8 +288,26 @@ function initTheme() {
     applyTheme(getTheme());
 }
 
+// Numpad handler
+function handleNumpadKey(key) {
+    if (input.disabled) return;
+    if (key === 'back') {
+        input.value = input.value.slice(0, -1);
+    } else if (key === 'submit') {
+        form.requestSubmit();
+    } else {
+        if (input.value.length < 4) {
+            input.value += key;
+        }
+    }
+}
+
 // Event listeners
 form.addEventListener('submit', handleGuess);
+numpad.addEventListener('click', (e) => {
+    const btn = e.target.closest('.num-key');
+    if (btn) handleNumpadKey(btn.dataset.key);
+});
 playAgainButton.addEventListener('click', initGame);
 difficultyButtons.forEach(btn => btn.addEventListener('click', setDifficulty));
 resetStatsBtn.addEventListener('click', resetStats);
