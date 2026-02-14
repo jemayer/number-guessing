@@ -1,10 +1,11 @@
 ---
 # number-guessing-qiur
 title: Remove player name feature
-status: todo
+status: completed
 type: task
+priority: normal
 created_at: 2026-02-14T09:22:39Z
-updated_at: 2026-02-14T09:22:39Z
+updated_at: 2026-02-14T09:27:41Z
 parent: number-guessing-m2sr
 ---
 
